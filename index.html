@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Biology student review center: learn, practice, assess, and review standards.">
+<title>Biology Review Center</title>
+<style>
+:root{color-scheme:light;--bg:#F1F5F6;--surface:#FFFFFF;--ink:#17252E;--muted:#55666F;--line:#D2DCE0;--stain:#22567A;--stain-soft:#E0ECF3;--eosin:#A8365F;--eosin-soft:#F6E3EA;--ok:#2C7A4B;--ok-soft:#E1F1E7;--serif:"Iowan Old Style","Palatino Linotype",Palatino,Charter,Georgia,serif;--sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0E1920;--surface:#15232C;--ink:#E4EDF1;--muted:#9CB0BA;--line:#2A3D48;--stain:#86BCE0;--stain-soft:#1A3243;--eosin:#E68DB2;--eosin-soft:#3A1E2B;--ok:#6FCB93;--ok-soft:#163323}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0E1920;--surface:#15232C;--ink:#E4EDF1;--muted:#9CB0BA;--line:#2A3D48;--stain:#86BCE0;--stain-soft:#1A3243;--eosin:#E68DB2;--eosin-soft:#3A1E2B;--ok:#6FCB93;--ok-soft:#163323}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55}
+a{color:var(--stain)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--eosin);outline-offset:3px}
+.top{background:var(--surface);border-bottom:1px solid var(--line)}
+.topin{max-width:860px;margin:auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font:600 1.1rem var(--serif);text-decoration:none;color:var(--ink)}
+.kicker{font-size:.78rem;letter-spacing:.08em;font-weight:700;text-transform:uppercase;color:var(--stain)}
+.topright{font-size:.85rem;color:var(--muted)}
+main{max-width:860px;margin:0 auto;padding:32px 20px 72px}
+h1,h2,h3{font-family:var(--serif);line-height:1.18;font-weight:600}
+h1{font-size:clamp(2rem,5vw,3rem);margin:.25em 0 .4em}
+h2{font-size:1.5rem;margin:0}
+h3{font-size:1.12rem;margin:.1em 0}
+p{margin:.5em 0 1em}
+.hero{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;margin-bottom:26px}
+.hero p{max-width:570px;color:var(--muted)}
+.cellart{position:relative;width:150px;height:150px;border:5px solid var(--stain);border-radius:44% 56% 54% 46%;background:var(--stain-soft);transform:rotate(-9deg)}
+.cellart:before{content:"";position:absolute;width:57px;height:57px;left:43px;top:39px;background:var(--eosin-soft);border:5px solid var(--eosin);border-radius:50%}
+.cellart:after{content:"";position:absolute;width:13px;height:13px;left:65px;top:61px;background:var(--eosin);border-radius:50%;box-shadow:-39px 16px 0 -2px var(--stain),48px 7px 0 -1px var(--stain),-9px 48px 0 -2px var(--stain),27px -35px 0 -2px var(--stain)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;margin:16px 0}
+.sectionhead{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.pill{font-size:.76rem;font-weight:700;border-radius:999px;padding:4px 10px;background:var(--ok-soft);color:var(--ok)}
+.lesson{margin:18px 0 8px;padding:14px 16px;border-radius:12px;background:var(--stain-soft);border-left:4px solid var(--stain)}
+.lesson strong{font-family:var(--serif);font-size:1.07rem}
+.path{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:16px 0 6px}
+.path div{padding:10px;border:1px solid var(--line);border-radius:10px;font-size:.84rem;background:var(--surface)}
+.path b{display:block;font-size:.76rem;color:var(--stain);margin-bottom:3px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.topic{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--surface);min-height:124px}
+.topic .code{display:inline-block;background:var(--stain-soft);color:var(--stain);font-weight:700;border-radius:6px;padding:2px 8px;font-size:.78rem;margin-bottom:7px}
+.topic p{font-size:.91rem;color:var(--muted);margin:.35em 0 0}
+.cta{display:inline-flex;justify-content:center;align-items:center;gap:9px;background:var(--stain);color:var(--surface);font-weight:700;text-decoration:none;border-radius:11px;padding:13px 20px;margin:12px 0 6px}
+.cta:hover{filter:brightness(1.1)}
+.note{font-size:.89rem;color:var(--muted)}
+.queued{border:1px dashed var(--line);border-radius:13px;padding:18px 20px;margin-top:14px;background:var(--surface)}
+.queued h3{margin:0 0 5px}
+.queued p{margin:0;color:var(--muted);font-size:.92rem}
+footer{font-size:.82rem;color:var(--muted);border-top:1px solid var(--line);margin-top:36px;padding-top:16px}
+@media(max-width:600px){main{padding:22px 15px 48px}.hero{grid-template-columns:1fr}.cellart{display:none}.panel{padding:18px}.grid{grid-template-columns:1fr}.path{grid-template-columns:repeat(2,minmax(0,1fr))}.cta{display:flex}}
+</style>
+</head>
+<body>
+<header class="top"><div class="topin"><a class="brand" href="./">Biology Review Center</a><span class="topright">Student learning tools</span></div></header>
+<main>
+<section class="hero" aria-labelledby="page-title">
+<div><div class="kicker">Biology · Standards-referenced review</div><h1 id="page-title">Choose what to review.</h1><p>Learn the ideas, practice with feedback, check what you know, then return to anything you want to strengthen. One home for your Biology review activities.</p></div>
+<div class="cellart" aria-hidden="true"></div>
+</section>
+<section class="panel" aria-labelledby="unit2">
+<div class="sectionhead"><div><div class="kicker">Available now · Unit 2</div><h2 id="unit2">Cells</h2></div><span class="pill">Review available</span></div>
+<p>Review cell structure, transport, homeostasis, the cell cycle, and how specialized cells work together. The existing review includes a short lesson and practice questions for each topic, followed by a mastery check.</p>
+<div class="lesson"><strong>Your review path</strong><div class="path" aria-label="Learning sequence"><div><b>01</b>Reteach</div><div><b>02</b>Practice</div><div><b>03</b>Assess</div><div><b>04</b>Review results</div></div><span class="note">About 45 minutes · worked solutions, hints during practice, and an eight-question mastery check</span></div>
+<div class="grid" aria-label="Standards covered in the Unit 2 review">
+<article class="topic"><span class="code">CT1</span><h3>Cell structure &amp; transport</h3><p>Organelles, cell membranes, diffusion, and osmosis.</p></article>
+<article class="topic"><span class="code">H1</span><h3>Homeostasis &amp; feedback</h3><p>Dynamic equilibrium, stimuli, and feedback loops.</p></article>
+<article class="topic"><span class="code">OSF1</span><h3>Cell cycle &amp; mitosis</h3><p>Cell division, checkpoints, growth, and repair.</p></article>
+<article class="topic"><span class="code">OSF2 / OSF3</span><h3>Specialized cells &amp; organization</h3><p>Differentiation, stem cells, tissues, organs, and systems.</p></article>
+</div>
+<a class="cta" href="https://mrwheeling.github.io/bio-unit2-review/">Start Unit 2: Cells review <span aria-hidden="true">↗</span></a>
+<p class="note">This opens the complete original Unit 2 review in its existing website. All four topics share one continuous review, so you start at the beginning and move through the sections.</p>
+</section>
+<section aria-labelledby="more-units"><div class="kicker">Growing review library</div><h2 id="more-units">More Biology reviews</h2><div class="queued"><h3>Additional units and standards</h3><p>New units will appear here as their standards and review materials are confirmed. No unfinished review links are shown to students.</p></div></section>
+<footer>This website is a starting point for Biology review activities. Check your class's current instructions for which unit to study. Individual review activities are self-paced and do not automatically send results to your teacher.</footer>
+</main>
+</body>
+</html>
