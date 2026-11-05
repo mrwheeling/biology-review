@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Biology student reviews organized by unit and published standards.">
+<title>Biology · Student Review Center</title>
+<style>
+:root{color-scheme:light;--bg:#F3F6F8;--surface:#fff;--ink:#17252E;--muted:#55666F;--line:#D2DCE0;--stain:#22567A;--stain-soft:#E0ECF3;--eosin:#A8365F;--eosin-soft:#F6E3EA;--ok:#2C7A4B;--ok-soft:#E1F1E7;--bad:#B0261E;--bad-soft:#FAE5E2;--warn:#8F5B00;--warn-soft:#FAEFD8;--serif:"Iowan Old Style","Palatino Linotype",Palatino,Charter,Georgia,serif;--sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#0E1920;--surface:#15232C;--ink:#E4EDF1;--muted:#9CB0BA;--line:#2A3D48;--stain:#86BCE0;--stain-soft:#1A3243;--eosin:#E68DB2;--eosin-soft:#3A1E2B;--ok:#6FCB93;--ok-soft:#163323;--bad:#F2908A;--bad-soft:#3C1C1A;--warn:#E6B65C;--warn-soft:#382B12}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55}
+header{background:var(--surface);border-bottom:1px solid var(--line)}
+.top{max-width:950px;margin:auto;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;gap:14px}
+.brand{font-family:var(--serif);font-weight:700;text-decoration:none;color:var(--ink);font-size:1.12rem}.muted{color:var(--muted)}.tiny{font-size:.83rem}
+main{max-width:950px;margin:auto;padding:23px 18px 64px}h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.23}h1{font-size:clamp(1.8rem,4.4vw,2.6rem);margin:.3em 0}h2{font-size:1.55rem;margin:.15em 0}h3{font-size:1.13rem;margin:.35em 0}
+p{margin:.55em 0 1em}a{color:var(--stain)}button,select,input{font:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--eosin);outline-offset:2px}
+.kicker{font-size:.76rem;font-weight:700;letter-spacing:.075em;color:var(--stain);text-transform:uppercase}
+.panel,.q{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin:14px 0}
+.unitbuttons{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin:16px 0}
+.unit{border:1.5px solid var(--line);border-radius:11px;background:var(--surface);color:var(--ink);padding:11px 4px;min-height:72px}
+.unit strong{font:600 1.15rem var(--serif);display:block}.unit span{font-size:.7rem;color:var(--muted)}
+.unit.active{border-color:var(--stain);background:var(--stain-soft)}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:12px}.tools label{font-weight:700;color:var(--muted);font-size:.82rem;display:block;margin:0 0 5px}
+input[type=search],select{width:100%;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);padding:10px 12px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.tile{background:var(--surface);border:1.5px solid var(--line);border-radius:13px;min-height:132px;padding:17px;text-align:left;color:var(--ink)}
+.tile:hover,.tile:focus-visible{border-color:var(--stain)}.tile strong{font-family:var(--serif);font-size:1.13rem;display:block;margin:6px 0}.tile p{font-size:.88rem;color:var(--muted);margin:2px 0}
+.pill{display:inline-block;font-size:.75rem;border-radius:6px;padding:3px 8px;background:var(--stain-soft);color:var(--stain);font-weight:700}
+.pill.draft{background:var(--warn-soft);color:var(--warn)}.pill.live{background:var(--ok-soft);color:var(--ok)}
+.btn{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:10px 16px;font-weight:600}.btn.primary{background:var(--stain);color:var(--surface);border-color:var(--stain)}.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0}
+.nav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:18px 0}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:16px 0}
+.flow div{border:1px solid var(--line);border-radius:9px;text-align:center;padding:8px;font-size:.82rem}.flow .now{background:var(--stain-soft);border-color:var(--stain)}
+.box{background:var(--stain-soft);border-left:4px solid var(--stain);border-radius:10px;padding:15px;margin:13px 0}
+.warn{background:var(--warn-soft);border-left-color:var(--warn)}
+.answer{background:var(--ok-soft);padding:10px 14px;border-radius:10px;margin-top:12px}
+.q button.choice{display:block;width:100%;text-align:left;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);padding:10px 13px;margin:8px 0}
+.q button.choice.selected{border-color:var(--stain);background:var(--stain-soft)}.q button.choice.right{border-color:var(--ok);background:var(--ok-soft)}.q button.choice.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.q .prompt{font-weight:600}.feedback{padding:10px 13px;border-radius:8px;margin:8px 0;background:var(--warn-soft)}
+.level{font-size:.8rem;font-weight:700;color:var(--stain)}
+.checkbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}.checkbar span{display:block;height:100%;background:var(--ok);width:0}
+ul{padding-left:23px}li{margin:5px 0}footer{margin-top:50px;padding-top:15px;border-top:1px solid var(--line);color:var(--muted);font-size:.82rem}
+[hidden]{display:none!important}
+@media(max-width:660px){main{padding:18px 13px 50px}.unitbuttons{grid-template-columns:repeat(4,minmax(0,1fr))}.tools,.grid{grid-template-columns:1fr}.panel,.q{padding:16px}.flow div{font-size:.73rem;padding:8px 2px}}
+</style></head><body>
+<header><div class="top"><a class="brand" href="./">Biology Review Center</a><span class="muted tiny">2026–27 · Standards-referenced</span></div></header>
+<main>
+<section id="library">
+<div class="kicker">Choose a unit and standard</div><h1>What would you like to review?</h1>
+<p class="muted">No endless scrolling. Choose a unit, then tap the standard you want. Every draft review follows Reteach → Practice → Assess → Results.</p>
+<div class="tools"><div><label for="unitselect">Jump to unit</label><select id="unitselect"></select></div><div><label for="search">Find a standard</label><input id="search" type="search" placeholder="Code or topic: PS1, genetics, cells..."></div></div>
+<div id="units" class="unitbuttons" aria-label="Biology units"></div>
+<div class="row"><h2 id="unitheading" style="margin:0"></h2><span class="pill" id="count"></span></div>
+<div class="grid" id="cards"></div>
+<p class="tiny muted">Standards are taken from the Version 1 production-baseline mirror and verified Unit 1 learning map. New interactive reviews are drafts pending full alignment with classroom assessments and presentations.</p>
+</section>
+<section id="activity" hidden>
+<button class="btn" id="home">← All standards</button>
+<div class="panel"><div class="kicker" id="location"></div><h1 id="activitytitle"></h1><p id="standardtarget" class="muted"></p>
+<div id="subtopicbar"></div><div id="flow" class="flow"></div>
+<div id="activitybody"></div><div class="nav" id="navigation"></div></div>
+</section>
+<footer>Practice and assessment scores are for self-review only and are not submitted or recorded as official course evidence. Keep your teacher's assigned standards and class materials as the authority.</footer>
+</main>
+<script src="./standards.js"></script><script src="./reviews.js"></script><script src="./reviews-extra.js"></script>
+<script>
+(function(){
+'use strict';
+var standards=window.BIO_STANDARDS||[],mods=(window.BIO_MODULES||[]).concat(window.BIO_EXTRA_MODULES||[]),$=function(id){return document.getElementById(id);};
+var units=[...new Set(standards.map(function(s){return s.unit;}))].sort(function(a,b){return Number(a.match(/Unit (\d+)/)[1])-Number(b.match(/Unit (\d+)/)[1]);});
+var chosen=units[0],active=null,current=null,phase=0,practice=[],results=[],qi=0,attempts=0,selected=null,finished=false,feedback='';
+function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e;}
+function clear(node){node.replaceChildren();}
+function pickModules(s){var codes=s.code.match(/[A-Z]+\d+/g)||[];return mods.filter(function(m){return m.unit===Number(s.unit.match(/Unit (\d+)/)[1])&&codes.some(function(c){return (m.code.match(/[A-Z]+\d+/g)||[]).includes(c);});});}
+function home(){active=null;$('activity').hidden=true;$('library').hidden=false;window.scrollTo(0,0);renderCards();}
+function renderUnits(){clear($('units'));units.forEach(function(u){var b=el('button','unit'+(u===chosen?' active':''));b.type='button';b.appendChild(el('strong','',u.match(/Unit \d+/)[0]));b.appendChild(el('span','',u.split(': ')[1]||''));b.setAttribute('aria-pressed',String(u===chosen));b.onclick=function(){chosen=u;$('unitselect').value=u;$('search').value='';renderUnits();renderCards();};$('units').appendChild(b);});$('unitselect').value=chosen;}
+function renderCards(){clear($('cards'));var term=$('search').value.trim().toLowerCase();var chosenStandards=standards.filter(function(s){return term?([s.code,s.title,s.unit,s.level2,s.level3].join(' ').toLowerCase().includes(term)):s.unit===chosen;});$('unitheading').textContent=term?'Search results':chosen;$('count').textContent=chosenStandards.length+' standards';chosenStandards.forEach(function(s){var m=pickModules(s),b=el('button','tile');b.type='button';b.appendChild(el('span','pill',s.code));b.appendChild(el('strong','',s.title));b.appendChild(el('p','',m.length?m.length+' review topic'+(m.length===1?'':'s')+' · Reteach, Practice, Assess':'Original Unit 2 learning program'));b.appendChild(el('span','pill '+(s.unit.indexOf('Unit 2:')===0?'live':'draft'),s.unit.indexOf('Unit 2:')===0?'Original review':'Draft review'));b.onclick=function(){openStandard(s);};$('cards').appendChild(b);});if(!chosenStandards.length)$('cards').appendChild(el('p','muted','No matching standards. Try another word or unit.'));}
+function openStandard(s){active=s;current=null;phase=0;var group=pickModules(s);$('library').hidden=true;$('activity').hidden=false;$('location').textContent=s.unit+' · '+s.code;$('activitytitle').textContent=s.title;$('standardtarget').textContent=s.level3;$('home').onclick=home;clear($('subtopicbar'));if(s.unit.indexOf('Unit 2:')===0){$('flow').replaceChildren();$('activitybody').replaceChildren();$('navigation').replaceChildren();var p=el('p','','The complete, original Unit 2 review contains the related cell standards in one continuous program, with reteaching, practice, a mastery check, and results.');$('activitybody').appendChild(p);var a=el('a','btn primary','Open the original Cells review ↗');a.href='https://mrwheeling.github.io/bio-unit2-review/';$('activitybody').appendChild(a);$('activitybody').appendChild(el('p','muted tiny','Individual standard launches inside this existing app are not yet supported, so it starts at the beginning.'));window.scrollTo(0,0);return;}
+if(!group.length){$('activitybody').textContent='Review material is not available yet.';return;}
+if(group.length>1){$('subtopicbar').appendChild(el('p','tiny muted','This published standard combines several learning goals. Choose a topic within it:'));group.forEach(function(m){var b=el('button','btn',m.code+' · '+m.title);b.type='button';b.style.margin='4px';b.onclick=function(){startModule(m);};$('subtopicbar').appendChild(b);});}
+startModule(group[0]);window.scrollTo(0,0);}
+function startModule(m){current=m;phase=0;practice=[];results=[];qi=0;attempts=0;selected=null;finished=false;feedback='';render();}
+function nav(prev,next,fn){clear($('navigation'));if(prev){var back=el('button','btn','← Back');back.onclick=prev;$('navigation').appendChild(back);}if(next){var b=el('button','btn primary',next);b.onclick=fn;$('navigation').appendChild(b);}}
+function render(){var steps=['Reteach','Practice','Assess','Results'];clear($('flow'));steps.forEach(function(t,i){$('flow').appendChild(el('div',i===phase?'now':'',String(i+1)+'. '+t));});clear($('activitybody'));$('activitytitle').textContent=current.title;$('location').textContent=active.unit+' · '+active.code+' · '+current.code;
+if(phase===0){$('activitybody').appendChild(el('p','',current.intro));content('Foundation · Level 2.0',current.foundation);content('Target · Level 3.0',current.target);content('Worked example',current.worked);var w=el('div','box warn');w.appendChild(el('strong','','Common misconception'));w.appendChild(el('p','',current.mistake));$('activitybody').appendChild(w);nav(null,'Start guided practice →',function(){phase=1;practice=[];qi=0;render();});}
+if(phase===1){$('activitybody').appendChild(el('p','muted','Try each question. You can request a hint, check your answer, and see the explanation. Practice is not graded.'));renderQuestion(false);nav(function(){phase=0;render();},'Skip to assessment →',function(){phase=2;results=[];qi=0;render();});}
+if(phase===2){$('activitybody').appendChild(el('p','muted','Six questions: three Level 2.0 and three Level 3.0. One attempt each, no hints. Answers and worked explanations appear after you check.'));renderQuestion(true);nav(function(){phase=1;qi=0;render();},null,null);}
+if(phase===3){var correct=results.filter(Boolean).length;var lvl2=results.slice(0,3).filter(Boolean).length,lvl3=results.slice(3,6).filter(Boolean).length;content('Your assessment result',correct+' of 6 questions correct ('+Math.round(correct/6*100)+'%).');content('Level 2.0 foundations',lvl2+' of 3 correct.');content('Level 3.0 application',lvl3+' of 3 correct.');$('activitybody').appendChild(el('p','muted','This is a short review check, not an official Marzano proficiency score. Review missed topics and demonstrate your learning through your teacher’s assigned evidence.'));nav(function(){phase=0;render();},'Retake with a new question order',function(){phase=2;results=[];qi=0;render();});}}
+function content(h,p){var b=el('div','box');b.appendChild(el('h3','',h));b.appendChild(el('p','',p));$('activitybody').appendChild(b);}
+function questions(){return current.q.slice().sort(function(a,b){return a[0].localeCompare(b[0]);});}
+function renderQuestion(assess){var list=questions();if(qi>=list.length){if(assess){phase=3;render();}else{qi=0;phase=2;render();}return;}
+var q=list[qi];selected=null;attempts=0;finished=false;feedback='';var card=el('div','q');card.appendChild(el('span','level','Level '+q[0]+' · Question '+(qi+1)+' of '+list.length));card.appendChild(el('p','prompt',q[1]));var opts=[q[2],q[3],q[4]].sort(function(){return Math.random()-.5;});var controls=[];opts.forEach(function(choice){var b=el('button','choice',choice);b.type='button';b.onclick=function(){if(finished)return;selected=choice;controls.forEach(function(c){c.classList.toggle('selected',c===b);});};controls.push(b);card.appendChild(b);});var msgs=el('div','');card.appendChild(msgs);var buttonrow=el('div','row');var check=el('button','btn primary','Check answer');check.onclick=function(){if(finished||selected===null)return;attempts++;var good=selected===q[2];if(good||assess||attempts>=3){finished=true;controls.forEach(function(b){b.disabled=true;b.classList.remove('selected');if(b.textContent===q[2])b.classList.add('right');else if(b.textContent===selected)b.classList.add('wrong');});check.disabled=true;hint.disabled=true;if(assess)results.push(good);clear(msgs);msgs.appendChild(el('div',good?'answer':'feedback',(good?'Correct! ':'Not quite. ')+' '+q[5]));next.disabled=false;}else{clear(msgs);msgs.appendChild(el('div','feedback','Not yet. Try again or use the hint.'));}};buttonrow.appendChild(check);var hint=el('button','btn','Hint');hint.disabled=assess;hint.onclick=function(){clear(msgs);msgs.appendChild(el('div','feedback','Hint: Think about the foundation and worked example above.'));};buttonrow.appendChild(hint);card.appendChild(buttonrow);$('activitybody').appendChild(card);
+var next=el('button','btn primary',qi===list.length-1?(assess?'See results →':'Go to assessment →'):'Next question →');next.disabled=true;next.onclick=function(){qi++;render();};$('activitybody').appendChild(next);}
+$('unitselect').replaceChildren();units.forEach(function(u){var o=el('option','',u);o.value=u;$('unitselect').appendChild(o);});$('unitselect').onchange=function(v){chosen=v.target.value;$('search').value='';renderUnits();renderCards();};$('search').oninput=renderCards;renderUnits();renderCards();
+})();
+</script></body></html>
